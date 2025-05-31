@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { Item } from '../../types/item';
+import { CreatePost } from '../../models/post';
 
-type CreateItem = Pick<Item, 'title' | 'body'>;
+const SERVICE_URL = "https://jsonplaceholder.typicode.com"
 
 const fetchItems = async () => {
-  const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+  const response = await axios.get(`${SERVICE_URL}/posts`);
   return response.data;
 };
 
-const addItem = async (newItem: CreateItem) => {
-  const response = await axios.post('https://jsonplaceholder.typicode.com/posts', newItem);
+const addItem = async (newItem: CreatePost) => {
+  const response = await axios.post(`${SERVICE_URL}/posts`, newItem);
   return response.data;
 };
 

@@ -1,17 +1,17 @@
 import React from "react";
-import { Item } from "../../../types/item";
+import { Post } from "../../../models/post";
 
 interface ItemProps {
-    items: Item[];
-    renderComponent?: (item: Item) => JSX.Element;
+    posts: Post[];
+    renderComponent?: (post: Post) => JSX.Element;
 }
 
-const ItemList = ({ items, renderComponent }: ItemProps) => {
+const ItemList = ({ posts, renderComponent }: ItemProps) => {
   return (
     <div className="mt-4 bg-gray-400 p-4 max-h-48 lg:max-h-[500px] overflow-y-auto rounded">
-      {items?.map(item => (
-        <React.Fragment key={item.id}>
-            {renderComponent?.(item)}
+      {posts?.map(post => (
+        <React.Fragment key={post.id}>
+            {renderComponent?.(post)}
         </React.Fragment>
       ))}
     </div>
