@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useAddItem } from '../../../hooks/useAddItem';
 import Title from '../../atoms/Title';
 import Form from '../../molecules/Form';
 import Input from '../../atoms/Input';
 import TextArea from '../../atoms/TextArea';
 import Btn from '../../atoms/Btn';
+import { usePostsContext } from '../../../hooks/userPostContext';
 
 interface FormData {
     title: string;
@@ -12,11 +12,11 @@ interface FormData {
 }
 
 const PostForm = () => {
+    const {addPost} = usePostsContext();
     const { register, handleSubmit, reset } = useForm<FormData>();
-    const mutation = useAddItem();
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
-        mutation.mutate(data);
+        addPost(data.title, data.body)
         reset();
     };
 
