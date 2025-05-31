@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { QueryClient, QueryClientProvider, useQuery, useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import './index.css';
 
 const fetchItems = async () => {
   const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
