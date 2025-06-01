@@ -13,7 +13,7 @@ interface FormData {
 
 const PostForm = () => {
     const {addPost} = usePostsContext();
-    const { register, handleSubmit, reset } = useForm<FormData>();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
     const onSubmit: SubmitHandler<FormData> = (data) => {
         addPost(data.title, data.body)
@@ -24,8 +24,26 @@ const PostForm = () => {
         <>
             <Title level={1}>Add New Item</Title>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Input {...register('title')} placeholder='Title'/>
-                <TextArea {...register('body')} placeholder='Body'/>
+                <Input 
+                    {...register('title', {
+                        required: 'Title is required',
+                        minLength: { value: 6, message: 'Title must be more than 5 characters' }
+                    })}
+                    placeholder='Title'
+                />
+                {errors.title && (
+                    <div className="text-red-500 text-sm">{errors.title.message as string}</div>
+                )}
+                <TextArea 
+                    {...register('body', {
+                        required: 'Body is required',
+                        minLength: { value: 6, message: 'Body must be more than 5 characters' }
+                    })}
+                    placeholder='Body'
+                />
+                {errors.body && (
+                    <div className="text-red-500 text-sm">{errors.body.message as string}</div>
+                )}
                 <Btn>Add Item</Btn>
             </Form>
         </>

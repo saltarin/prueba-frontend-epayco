@@ -8,7 +8,7 @@ interface ItemProps {
 
 const ItemList = ({ posts, renderComponent }: ItemProps) => {
   return (
-    <div className="mt-4 bg-gray-400 p-4 max-h-48 lg:max-h-[500px] overflow-y-auto rounded">
+    <div className="mt-4 bg-gray-400 p-4 max-h-48 lg:max-h-[500px] min-h-20 overflow-y-auto rounded">
       {posts?.map(post => (
         <React.Fragment key={post.id}>
             {renderComponent?.(post)}
